@@ -30,7 +30,10 @@ def keep_login_and_wait()->None:
             break
 
 
-def buy():
+def buy()->None:
+    """
+    Exe buy.
+    """
     driver.get("https://cart.taobao.com/cart.htm")
     print("The shopping cart website has been opened.\n\
         Please scan the code and log in within 15 seconds...")
