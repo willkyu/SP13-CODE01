@@ -1,5 +1,5 @@
 ===========================================
-# 拾叁号观星阁 CODE:01 Ver1.0.  by willkyu
+# 拾叁号观星阁 CODE:01  by willkyu
 ## CODE:01 of Stargazing Pavilion 13  by willkyu
 ===========================================
 ## **Usage**
@@ -8,7 +8,7 @@ Clear your tb shopping cart at set time.
 ## **Preconditions**：
 - Fast network speed.
 - Installed Chrome browser.
-- only things need to buy in your cart.
+- Only things need to buy in your cart.
 
 ## **How to use**：
 - Open the software and **Enter The Time In The Format**.
