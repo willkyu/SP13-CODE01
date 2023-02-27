@@ -5,92 +5,96 @@ import random
 from selenium.webdriver.common.by import By
 from sys import exit
 
-# ====  标识登录状态、重试次数 ====
-MAX_LOGIN_RETRY_TIMES = 2
-
-current_retry_login_times = 0
-login_success = False
-
-def __refresh_keep_alive():
-    # 重新加载购物车页面，定时操作，防止长时间不操作退出登录
+def __refresh_keep_alive()->None:
+    """
+    Refresh the driver to prevent login timeout.
+    """
     driver.get("https://cart.taobao.com/cart.htm")
     print("刷新购物车界面，防止登录超时...")
     time.sleep(random.randint(55,70))
 
-def keep_login_and_wait():
-    print("当前距离抢购时间点还有较长时间，开始定时刷新防止登录超时...")
+
+def keep_login_and_wait()->None:
+    """
+    Keep refresh till set time is approaching.
+    """
+    print("There is still a long time to go before the time point of rush purchase. \n\
+        Start regular refresh to prevent login timeout...")
     while True:
         current_time = datetime.datetime.now()
         if (buy_time_object - current_time).seconds > 180:
             __refresh_keep_alive()
         else:
-            print("抢购时间点将近，停止自动刷新，准备进入抢购阶段...")
+            print("The time point of rush purchase is approaching.\n\
+                Stop automatic refresh and prepare to enter the rush purchase stage...")
             break
 
+
 def buy():
-    # 打开购物车
     driver.get("https://cart.taobao.com/cart.htm")
-    print("已打开购物车网站 请在15秒内扫码登录...")
+    print("The shopping cart website has been opened.\n\
+        Please scan the code and log in within 15 seconds...")
     
     time.sleep(15)
 
-    # 点击购物车里全选按钮
     while True:
         try:
             driver.find_element(value="J_SelectAll1").click()
-            print("已经选中购物车中全部商品 ...")
+            print("All items in the shopping cart have been selected...")
             break
         except:
-            print("没发现全选按钮，可能页面还没加载出来，重试...")
+            print("No Select All button found. The page may not be loaded yet.\n\
+                Try again...")
 
     while True:
         now = datetime.datetime.now()
         if now >= buy_time_object:
-            print("到达抢购时间，开始尝试执行抢购...")
+            print("The rush time is approaching.\n\
+                Start trying to execute the rush...")
             try:
-                # 点击结算按钮
                 if driver.find_element(value="J_Go"):
                     driver.find_element(value="J_Go").click()
-                    print("已经点击结算按钮...")
+                    print("The settlement button has been clicked...")
                     click_submit_times = 0
                     while True:
                         try:
                             driver.find_element(by=By.LINK_TEXT,value='提交订单').click()
-                            print("已经点击提交订单按钮")
+                            print("The Submit Order button has been clicked...")
                             break
                             
                         except Exception as ee:
-                            print("没发现提交订单按钮，可能页面还没加载出来，重试...")
+                            print("No Order Submission button found. The page may not be loaded yet.\n\
+                                Try again...")
                             click_submit_times = click_submit_times + 1
             except Exception as e:
                 print(e)
-                print("失败了或者提交成功，即将退出程序。")
+                print("Failed or submitted successfully.\n\
+                    The program will be closed...")
                 time.sleep(3)
                 break
 
 
 
 if __name__ == '__main__':
-    print("淘宝抢购小工具 拾叁号观星阁Ver.  by willkyu")
+    print("CODE:01 of Stargazing Pavilion 13  by willkyu")
     print("===========================")
-    # ==== 设定抢购时间 （修改此处，指定抢购时间点）====
     cur_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    BUY_TIME = input(f"请输入抢购时间，格式如 {cur_time} :\n")
+    BUY_TIME = input(f"Please enter the rush time in the format as follows {cur_time} :\n")
     buy_time_object = datetime.datetime.strptime(BUY_TIME, '%Y-%m-%d %H:%M:%S')
-    print(f"已设置抢购时间为：{buy_time_object}")
+    print(f"The rush purchase time has been set to: {buy_time_object}")
     now_time = datetime.datetime.now()
     if now_time > buy_time_object:
-        print("当前已过抢购时间，请确认抢购时间是否填错...")
+        print("The rush purchase time has passed.\n\
+            Please confirm whether the rush purchase time is filled incorrectly...")
         exit(0)
 
-    print("正在打开chrome浏览器...")
-    # 让浏览器不要显示当前受自动化测试工具控制的提醒
+    print("Opening Chrome browser...")
     option = webdriver.ChromeOptions()
     option.add_argument('disable-infobars')
     driver = webdriver.Chrome(executable_path='chromedriver', options=option)
 
     driver.maximize_window()
-    print("chrome浏览器已经打开...")
+    print("Chrome browser has been opened...")
 
     keep_login_and_wait()
     buy()
