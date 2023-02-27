@@ -1,17 +1,21 @@
-淘宝抢购小工具 拾叁号观星阁Ver.  by willkyu
 ===========================================
+# 拾叁号观星阁 CODE:01 Ver1.0.  by willkyu
+## CODE:01 of Stargazing Pavilion 13  by willkyu
+===========================================
+## **Usage**
+Clear your tb shopping cart at set time.
 
-##**前提条件**：
-- 网络越好越快
-- 安装了chrome浏览器
-- tb购物车中只剩下需要抢购的东西
+## **Preconditions**：
+- Fast network speed.
+- Installed Chrome browser.
+- only things need to buy in your cart.
 
-##**使用方法**：
-- 打开软件，**按格式输入时间**
-- 打开手机淘宝，准备扫码登录
-- 等待浏览器启动并跳转到登录页
-- 选择扫码登录，使用**手机淘宝扫码登录**
-- 等待设定时间软件抢购成功
-- 使用**手机淘宝**自行付款
+## **How to use**：
+- Open the software and **Enter The Time In The Format**.
+- Open mobile Taobao and prepare to scan code to log in.
+- Wait for the browser to start and jump to the login page.
+- Select Scan Code Login, and use **Mobile Taobao Scan Code Login**
+- Wait until the set time when software is snapped up successfully.
+- Use **Mobile Taobao** to pay by yourself
 
-##**请勿外传**
+## **DO NOT PASS IT ON**
