@@ -10,7 +10,7 @@ def __refresh_keep_alive()->None:
     Refresh the driver to prevent login timeout.
     """
     driver.get("https://cart.taobao.com/cart.htm")
-    print("刷新购物车界面，防止登录超时...")
+    print("Refresh the driver to prevent login timeout...")
     time.sleep(random.randint(55,70))
 
 
