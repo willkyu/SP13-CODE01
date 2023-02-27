@@ -17,7 +17,6 @@ def __refresh_keep_alive():
     print("刷新购物车界面，防止登录超时...")
     time.sleep(random.randint(55,70))
 
-
 def keep_login_and_wait():
     print("当前距离抢购时间点还有较长时间，开始定时刷新防止登录超时...")
     while True:
@@ -27,7 +26,6 @@ def keep_login_and_wait():
         else:
             print("抢购时间点将近，停止自动刷新，准备进入抢购阶段...")
             break
-
 
 def buy():
     # 打开购物车
@@ -62,10 +60,8 @@ def buy():
                             break
                             
                         except Exception as ee:
-                            # print(ee)
                             print("没发现提交订单按钮，可能页面还没加载出来，重试...")
                             click_submit_times = click_submit_times + 1
-                            #time.sleep(0.1)
             except Exception as e:
                 print(e)
                 print("失败了或者提交成功，即将退出程序。")
@@ -91,10 +87,6 @@ if __name__ == '__main__':
     # 让浏览器不要显示当前受自动化测试工具控制的提醒
     option = webdriver.ChromeOptions()
     option.add_argument('disable-infobars')
-    #windows
-    #driver = webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=option)
-    #linux
-    #driver = webdriver.Chrome(executable_path='assets/chromedriver', chrome_options=option)
     driver = webdriver.Chrome(executable_path='chromedriver', options=option)
 
     driver.maximize_window()
